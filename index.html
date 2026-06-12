@@ -3,128 +3,254 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>MarketPlace - Anuncie Grátis</title>
+    <title>MarketPlace Pro - Anuncie Grátis</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        :root {
+            --primary: #ff6b00;
+            --primary-dark: #e55a00;
+            --secondary: #00a884;
+            --danger: #dc3545;
+            --success: #28a745;
+            --warning: #ffc107;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+        }
+
         body { background: #f0f2f5; }
-        
+
+        .app-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+        }
+
         .header {
-            background: #ff6b00;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
-            padding: 20px;
+            padding: 15px 20px;
             text-align: center;
+            position: relative;
         }
-        
-        .header h1 { font-size: 1.8rem; }
-        
+
+        .header h1 { font-size: 1.5rem; }
+        .header p { font-size: 0.8rem; opacity: 0.9; }
+
         .user-info {
-            text-align: right;
-            margin-top: 10px;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
         }
-        
+
         .user-info button {
             background: rgba(255,255,255,0.2);
             border: none;
-            padding: 8px 15px;
+            padding: 5px 12px;
             border-radius: 20px;
             color: white;
             cursor: pointer;
-            margin: 5px;
+            font-size: 12px;
         }
-        
+
         .sell-btn {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: #00a884;
+            background: var(--secondary);
             color: white;
-            width: 60px;
-            height: 60px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
-            font-size: 30px;
-            border: none;
-            cursor: pointer;
-            z-index: 100;
-        }
-        
-        .nav-tabs {
-            display: flex;
-            background: white;
-            padding: 0 20px;
-            gap: 20px;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        .nav-tab {
-            padding: 15px 20px;
-            cursor: pointer;
-            border: none;
-            background: none;
-            font-weight: bold;
-        }
-        
-        .nav-tab.active {
-            color: #ff6b00;
-            border-bottom: 2px solid #ff6b00;
-        }
-        
-        .content { padding: 20px; min-height: 400px; }
-        
-        .ads-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-        }
-        
-        .ad-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            position: relative;
-        }
-        
-        .featured-badge {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: gold;
-            color: #856404;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-        }
-        
-        .ad-image {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            background: #f8f9fa;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 50px;
-        }
-        
-        .ad-info { padding: 15px; }
-        .ad-title { font-weight: bold; font-size: 1.1rem; }
-        .ad-price { font-size: 1.3rem; color: #ff6b00; font-weight: bold; margin: 10px 0; }
-        
-        button {
-            border: none;
-            padding: 10px;
-            border-radius: 8px;
+            font-size: 28px;
             cursor: pointer;
+            border: none;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: white;
+            border-bottom: 1px solid var(--light);
+            padding: 0 15px;
+            gap: 15px;
+            overflow-x: auto;
+        }
+
+        .nav-tab {
+            padding: 12px 15px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-weight: 600;
+            color: var(--gray);
+            white-space: nowrap;
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .content { padding: 15px; min-height: 500px; }
+
+        .ads-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .ad-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: gold;
+            color: #856404;
+            padding: 2px 10px;
+            border-radius: 15px;
+            font-size: 10px;
             font-weight: bold;
+            z-index: 1;
+        }
+
+        .pending-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: var(--warning);
+            color: #856404;
+            padding: 2px 10px;
+            border-radius: 15px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .ad-image {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 45px;
+            cursor: pointer;
+        }
+
+        .ad-info { padding: 12px; }
+        .ad-title { font-weight: bold; font-size: 15px; }
+        .ad-price { font-size: 18px; color: var(--primary); font-weight: bold; margin: 6px 0; }
+        .ad-seller { font-size: 11px; color: var(--gray); display: flex; justify-content: space-between; margin-top: 8px; }
+
+        .btn-contact, .btn-feature, .btn-delete {
+            border: none;
+            padding: 8px;
+            width: 100%;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 6px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .btn-contact { background: #25D366; color: white; }
+        .btn-feature { background: var(--primary); color: white; }
+        .btn-delete { background: var(--danger); color: white; }
+
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 13px; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .images-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 8px;
             margin-top: 8px;
         }
-        
-        .btn-contact { background: #25D366; color: white; width: 100%; }
-        .btn-feature { background: #ff6b00; color: white; width: 100%; }
-        .btn-delete { background: #dc3545; color: white; width: 100%; }
-        
+
+        .image-upload-card {
+            border: 1px dashed #ddd;
+            border-radius: 8px;
+            padding: 8px;
+            text-align: center;
+            position: relative;
+            background: var(--light);
+            cursor: pointer;
+        }
+
+        .image-upload-card img {
+            width: 100%;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .image-upload-card input {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+        }
+
+        .remove-image {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background: var(--danger);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .btn { padding: 10px 20px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        .btn-primary { background: var(--primary); color: white; width: 100%; }
+
         .modal {
             position: fixed;
             top: 0;
@@ -137,187 +263,166 @@
             align-items: center;
             z-index: 1000;
         }
-        
+
         .modal.active { display: flex; }
-        
         .modal-content {
             background: white;
-            padding: 30px;
-            border-radius: 20px;
+            padding: 20px;
+            border-radius: 15px;
             max-width: 500px;
             width: 90%;
             max-height: 80vh;
             overflow-y: auto;
         }
-        
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-        }
-        
-        .btn-primary { background: #ff6b00; color: white; width: 100%; padding: 12px; }
-        .btn-primary:hover { background: #e55a00; }
-        
+
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+            gap: 12px;
             margin-bottom: 20px;
         }
-        
+
         .stat-card {
-            background: linear-gradient(135deg, #ff6b00, #e55a00);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
-            padding: 20px;
-            border-radius: 12px;
+            padding: 12px;
+            border-radius: 10px;
             text-align: center;
         }
-        
-        .stat-number { font-size: 2rem; font-weight: bold; }
-        
-        .payment-request-card {
+
+        .stat-number { font-size: 22px; font-weight: bold; }
+        .stat-label { font-size: 11px; }
+
+        .payment-config {
+            background: var(--light);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .plan-card {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            text-align: center;
+            transition: 0.2s;
+        }
+
+        .plan-card:hover { border-color: var(--primary); transform: scale(1.02); }
+        .plan-price { font-size: 20px; color: var(--primary); font-weight: bold; }
+
+        .qr-code {
+            text-align: center;
+            padding: 15px;
+            background: var(--light);
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .copy-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .payment-card {
             background: white;
             border: 1px solid #ddd;
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 15px;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 12px;
         }
-        
-        .success-message, .error-message {
+
+        .error-message, .success-message {
             padding: 10px;
             border-radius: 8px;
             margin-bottom: 15px;
             display: none;
+            font-size: 13px;
         }
-        
-        .success-message { background: #d4edda; color: #155724; }
         .error-message { background: #f8d7da; color: #721c24; }
-        
-        .pix-highlight { font-size: 1.3rem; font-weight: bold; color: #ff6b00; }
-        
-        .qr-code {
-            text-align: center;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 12px;
-            margin-top: 15px;
-        }
-        
-        .copy-btn {
-            background: #ff6b00;
-            color: white;
-            padding: 10px 20px;
-            margin-top: 10px;
-        }
-        
-        .plan-card {
-            border: 2px solid #ddd;
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            text-align: center;
-        }
-        
-        .plan-card:hover { border-color: #ff6b00; }
-        .plan-price { font-size: 1.5rem; color: #ff6b00; font-weight: bold; }
-        
-        .loading { text-align: center; padding: 40px; color: #666; }
-        
-        @media (max-width: 768px) {
+        .success-message { background: #d4edda; color: #155724; }
+
+        .loading { text-align: center; padding: 40px; color: var(--gray); }
+        .pix-highlight { font-size: 18px; font-weight: bold; color: var(--primary); }
+
+        @media (max-width: 600px) {
             .ads-grid { grid-template-columns: 1fr; }
             .stats-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
 <body>
-<div class="header">
-    <h1>🛒 MarketPlace</h1>
-    <p>Anuncie grátis | Destaque seu produto</p>
-    <div class="user-info" id="userInfo">
-        <span id="userName">Visitante</span>
-        <button onclick="logout()" id="logoutBtn" style="display:none;">Sair</button>
-        <button onclick="showLogin()" id="loginBtn">Entrar</button>
+<div class="app-container">
+    <div class="header">
+        <h1>🛒 MarketPlace Pro</h1>
+        <p>Anuncie grátis | Destaque seu produto com PIX</p>
+        <div class="user-info" id="userInfo">
+            <span id="userName">Visitante</span>
+            <button onclick="logout()" id="logoutBtn" style="display:none;">Sair</button>
+            <button onclick="showLogin()" id="loginBtn">Entrar</button>
+        </div>
     </div>
-</div>
 
-<div class="nav-tabs">
-    <button class="nav-tab active" onclick="changeTab('home')">🏠 Início</button>
-    <button class="nav-tab" onclick="changeTab('myads')">📦 Meus Anúncios</button>
-    <button class="nav-tab admin-only" onclick="changeTab('admin')" style="display:none;">👑 Admin</button>
-    <button class="nav-tab admin-only" onclick="changeTab('payments')" style="display:none;">💰 Pagamentos</button>
-</div>
+    <div class="nav-tabs">
+        <button class="nav-tab active" onclick="changeTab('home')">🏠 Início</button>
+        <button class="nav-tab" onclick="changeTab('myads')">📦 Meus Anúncios</button>
+        <button class="nav-tab admin-only" onclick="changeTab('admin')" style="display:none;">👑 Admin</button>
+        <button class="nav-tab admin-only" onclick="changeTab('payments')" style="display:none;">💰 Pagamentos</button>
+    </div>
 
-<div class="content" id="content"></div>
+    <div class="content" id="content"></div>
+</div>
 
 <button class="sell-btn" onclick="showSellModal()">+</button>
 
-<!-- Modal Login -->
+<!-- Login Modal -->
 <div id="loginModal" class="modal">
     <div class="modal-content">
-        <h2 style="text-align:center;">🔐 Entrar</h2>
+        <h3 style="text-align:center;">🔐 Entrar / Cadastrar</h3>
         <div id="loginError" class="error-message"></div>
-        <div class="form-group">
-            <label>Nome</label>
-            <input type="text" id="regName" placeholder="Seu nome">
-        </div>
-        <div class="form-group">
-            <label>Email</label>
-            <input type="email" id="loginEmail" placeholder="email@exemplo.com">
-        </div>
-        <div class="form-group">
-            <label>Senha</label>
-            <input type="password" id="loginPassword" placeholder="••••••">
-        </div>
+        <div class="form-group"><label>Nome</label><input type="text" id="regName" placeholder="Seu nome"></div>
+        <div class="form-group"><label>Email</label><input type="email" id="loginEmail" placeholder="email@exemplo.com"></div>
+        <div class="form-group"><label>Senha</label><input type="password" id="loginPassword" placeholder="••••••"></div>
         <button class="btn-primary" onclick="login()">Entrar</button>
-        <button style="width:100%; margin-top:10px; background:#ddd;" onclick="register()">Criar Conta</button>
-        <button style="width:100%; margin-top:10px; background:#eee;" onclick="closeModal('loginModal')">Fechar</button>
+        <button style="width:100%; margin-top:8px; background:#ddd; padding:10px; border-radius:8px;" onclick="register()">Criar Conta Grátis</button>
+        <button style="width:100%; margin-top:8px; background:#eee; padding:10px; border-radius:8px;" onclick="closeModal('loginModal')">Fechar</button>
     </div>
 </div>
 
-<!-- Modal Criar Anúncio -->
+<!-- Sell Modal -->
 <div id="sellModal" class="modal">
     <div class="modal-content">
-        <h2>📝 Criar Anúncio</h2>
+        <h3>📝 Criar Anúncio</h3>
         <div id="sellError" class="error-message"></div>
         <div class="form-group">
-            <label>Título</label>
-            <input type="text" id="adTitle" placeholder="Ex: Geladeira">
+            <label>📸 Fotos (até 5)</label>
+            <div id="imagesContainer" class="images-container"></div>
+            <button type="button" style="width:100%; margin-top:8px; background:#e0e0e0; padding:8px; border:none; border-radius:6px; cursor:pointer;" onclick="addImageUpload()">+ Adicionar Foto</button>
         </div>
-        <div class="form-group">
-            <label>Categoria</label>
-            <select id="adCategory">
-                <option>Eletrônicos</option><option>Moda</option><option>Imóveis</option><option>Veículos</option><option>Outros</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Preço (R$)</label>
-            <input type="number" id="adPrice" placeholder="0,00">
-        </div>
-        <div class="form-group">
-            <label>Descrição</label>
-            <textarea id="adDescription" rows="3"></textarea>
-        </div>
-        <div class="form-group">
-            <label>Whatsapp</label>
-            <input type="text" id="adWhatsapp" placeholder="(11) 99999-9999">
-        </div>
-        <button class="btn-primary" onclick="createAd()">Publicar</button>
-        <button style="width:100%; margin-top:10px; background:#ddd;" onclick="closeModal('sellModal')">Cancelar</button>
+        <div class="form-group"><label>Título *</label><input type="text" id="adTitle" placeholder="Ex: Geladeira"></div>
+        <div class="form-group"><label>Categoria</label><select id="adCategory"><option>Eletrônicos</option><option>Moda</option><option>Imóveis</option><option>Veículos</option><option>Outros</option></select></div>
+        <div class="form-group"><label>Preço (R$) *</label><input type="number" id="adPrice" placeholder="0,00"></div>
+        <div class="form-group"><label>Descrição</label><textarea id="adDescription" rows="2"></textarea></div>
+        <div class="form-group"><label>Whatsapp</label><input type="text" id="adWhatsapp" placeholder="(11) 99999-9999"></div>
+        <button class="btn-primary" onclick="createAd()">Publicar Anúncio</button>
+        <button style="width:100%; margin-top:8px; background:#ddd; padding:10px; border-radius:8px;" onclick="closeModal('sellModal')">Cancelar</button>
     </div>
 </div>
 
-<!-- Modal Destaque -->
+<!-- Featured Modal -->
 <div id="featuredModal" class="modal">
     <div class="modal-content">
-        <h2>⭐ Destacar Anúncio</h2>
+        <h3>⭐ Destacar Anúncio</h3>
         <div id="plansList"></div>
         <div id="paymentInfo"></div>
-        <button style="width:100%; margin-top:10px; background:#ddd;" onclick="closeModal('featuredModal')">Fechar</button>
+        <button style="width:100%; margin-top:10px; background:#ddd; padding:10px; border-radius:8px;" onclick="closeModal('featuredModal')">Fechar</button>
     </div>
 </div>
 
@@ -328,29 +433,36 @@
     let users = [];
     let paymentRequests = [];
     let selectedAdForFeature = null;
+    let imageDataList = [];
 
     function loadData() {
-        let saved = localStorage.getItem('ads');
+        let saved = localStorage.getItem('marketplace_completo_ads');
         if(saved) ads = JSON.parse(saved);
-        saved = localStorage.getItem('users');
+        saved = localStorage.getItem('marketplace_completo_users');
         if(saved) users = JSON.parse(saved);
-        else users = [{ id: 1, name: "Admin", email: "admin@marketplace.com", password: "admin123", role: "admin", balance: 0 }];
-        saved = localStorage.getItem('payments');
+        else users = [{ id: 1, name: "Administrador", email: "admin@123", password: "123", role: "admin", balance: 0 }];
+        saved = localStorage.getItem('marketplace_completo_payments');
         if(saved) paymentRequests = JSON.parse(saved);
-        saved = localStorage.getItem('user');
-        if(saved) { currentUser = JSON.parse(saved); updateUI(); }
+        saved = localStorage.getItem('marketplace_completo_user');
+        if(saved && saved != 'null') { currentUser = JSON.parse(saved); updateUI(); }
+        renderHome();
     }
-    function saveAll() { localStorage.setItem('ads', JSON.stringify(ads)); localStorage.setItem('users', JSON.stringify(users)); localStorage.setItem('payments', JSON.stringify(paymentRequests)); }
-    function saveUser() { if(currentUser) localStorage.setItem('user', JSON.stringify(currentUser)); else localStorage.removeItem('user'); }
+
+    function saveAll() {
+        localStorage.setItem('marketplace_completo_ads', JSON.stringify(ads));
+        localStorage.setItem('marketplace_completo_users', JSON.stringify(users));
+        localStorage.setItem('marketplace_completo_payments', JSON.stringify(paymentRequests));
+        if(currentUser) localStorage.setItem('marketplace_completo_user', JSON.stringify(currentUser));
+        else localStorage.removeItem('marketplace_completo_user');
+    }
 
     function updateUI() {
         if(currentUser) {
             document.getElementById('userName').innerHTML = `👤 ${currentUser.name}`;
             document.getElementById('loginBtn').style.display = 'none';
             document.getElementById('logoutBtn').style.display = 'inline-block';
-            document.querySelectorAll('.admin-only').forEach(tab => {
-                tab.style.display = currentUser.role === 'admin' ? 'inline-block' : 'none';
-            });
+            let adminBtns = document.querySelectorAll('.admin-only');
+            adminBtns.forEach(btn => { btn.style.display = currentUser.role === 'admin' ? 'inline-block' : 'none'; });
         } else {
             document.getElementById('userName').innerHTML = 'Visitante';
             document.getElementById('loginBtn').style.display = 'inline-block';
@@ -369,13 +481,14 @@
 
     function renderHome() {
         let sorted = [...ads].sort((a,b) => (a.featured && a.featuredExpiry > Date.now()) ? -1 : 1);
-        if(sorted.length === 0) { document.getElementById('content').innerHTML = '<div class="loading">📭 Nenhum anúncio</div>'; return; }
+        if(sorted.length === 0) { document.getElementById('content').innerHTML = '<div class="loading">📭 Nenhum anúncio. Seja o primeiro!</div>'; return; }
         let html = '<div class="ads-grid">';
         sorted.forEach(ad => {
             let seller = users.find(u => u.id === ad.userId);
             let isFeatured = ad.featured && ad.featuredExpiry > Date.now();
-            html += `<div class="ad-card">${isFeatured ? '<div class="featured-badge">⭐ DESTAQUE</div>' : ''}<div class="ad-image">📦</div><div class="ad-info"><div class="ad-title">${ad.title}</div><div class="ad-price">R$ ${ad.price.toFixed(2)}</div><div style="font-size:12px; color:#666;">${ad.description}</div><div style="font-size:11px; color:#999; margin-top:8px;">👤 ${seller ? seller.name : 'Usuário'} | 👁️ ${ad.views||0}</div><button class="btn-contact" onclick="contactSeller('${ad.whatsapp}','${ad.title}')">📞 Falar</button></div></div>`;
-            ad.views = (ad.views||0)+1;
+            let firstImage = ad.images && ad.images.length > 0 ? ad.images[0] : null;
+            html += `<div class="ad-card">${isFeatured ? '<div class="featured-badge">⭐ DESTAQUE</div>' : ''}<div class="ad-image" onclick="showImage('${firstImage || ''}')">${firstImage ? `<img src="${firstImage}" style="width:100%; height:100%; object-fit:cover;">` : '📦'}</div><div class="ad-info"><div class="ad-title">${ad.title}</div><div class="ad-price">R$ ${ad.price.toFixed(2)}</div><div style="font-size:12px; color:#666;">${ad.description.substring(0, 60)}</div><div class="ad-seller"><span>👤 ${seller ? seller.name : 'Usuário'}</span><span>👁️ ${ad.views || 0}</span></div><button class="btn-contact" onclick="contactSeller('${ad.whatsapp}','${ad.title}')">📞 Falar com vendedor</button></div></div>`;
+            ad.views = (ad.views || 0) + 1;
         });
         html += '</div>';
         document.getElementById('content').innerHTML = html;
@@ -383,89 +496,22 @@
     }
 
     function renderMyAds() {
-        if(!currentUser) { document.getElementById('content').innerHTML = '<div class="loading">🔐 Faça login</div>'; return; }
+        if(!currentUser) { document.getElementById('content').innerHTML = '<div class="loading">🔐 Faça login para ver seus anúncios<br><br><button class="btn-primary" style="width:auto; padding:8px 20px;" onclick="showLogin()">Fazer Login</button></div>'; return; }
         let myAds = ads.filter(a => a.userId === currentUser.id);
-        if(myAds.length === 0) { document.getElementById('content').innerHTML = '<div class="loading">📭 Seus anúncios aparecerão aqui</div>'; return; }
+        if(myAds.length === 0) { document.getElementById('content').innerHTML = '<div class="loading">📭 Você ainda não tem anúncios. Clique no botão + para criar!</div>'; return; }
         let html = '<div class="ads-grid">';
         myAds.forEach(ad => {
             let isFeatured = ad.featured && ad.featuredExpiry > Date.now();
-            let pending = paymentRequests.some(p => p.adId === ad.id && p.status === 'pending');
-            html += `<div class="ad-card"><div class="ad-image">📦</div><div class="ad-info"><div class="ad-title">${ad.title}</div><div class="ad-price">R$ ${ad.price.toFixed(2)}</div>${!isFeatured && !pending ? `<button class="btn-feature" onclick="showFeature(${ad.id})">⭐ Destacar</button>` : ''}${pending ? '<button style="background:#ffc107;" disabled>⏳ Aguardando</button>' : ''}${isFeatured ? '<div style="color:green;">✅ Destaque ativo</div>' : ''}<button class="btn-delete" onclick="deleteAd(${ad.id})">🗑️ Excluir</button></div></div>`;
+            let hasPending = paymentRequests.some(p => p.adId === ad.id && p.status === 'pending');
+            let firstImage = ad.images && ad.images.length > 0 ? ad.images[0] : null;
+            html += `<div class="ad-card"><div class="ad-image" onclick="showImage('${firstImage || ''}')">${firstImage ? `<img src="${firstImage}" style="width:100%; height:100%; object-fit:cover;">` : '📦'}</div>${hasPending ? '<div class="pending-badge">⏳ AGUARDANDO</div>' : ''}<div class="ad-info"><div class="ad-title">${ad.title} ${isFeatured ? '⭐' : ''}</div><div class="ad-price">R$ ${ad.price.toFixed(2)}</div><div class="ad-seller">👁️ ${ad.views || 0} views | 📸 ${ad.images ? ad.images.length : 0} fotos</div>${!isFeatured && !hasPending ? `<button class="btn-feature" onclick="showFeatureOptions(${ad.id})">⭐ Destacar (PIX R$15+)</button>` : ''}${hasPending ? '<button style="background:#ffc107;" disabled>⏳ Pagamento enviado</button>' : ''}${isFeatured ? '<div style="color:green; font-size:12px;">✅ Destaque ativo</div>' : ''}<button class="btn-delete" onclick="deleteAd(${ad.id})">🗑️ Excluir</button></div></div>`;
         });
         html += '</div>';
         document.getElementById('content').innerHTML = html;
     }
 
-    function showFeature(adId) {
+    function showFeatureOptions(adId) {
         if(!currentUser) { alert('Faça login'); return; }
-        selectedAdForFeature = adId;
-        let plans = [{days:7, price:15},{days:15, price:25},{days:30, price:40}];
-        let html = '';
-        plans.forEach(p => { html += `<div class="plan-card" onclick="selectPlan(${p.days},${p.price})"><div>⭐ ${p.days} dias</div><div class="plan-price">R$ ${p.price}</div></div>`; });
-        document.getElementById('plansList').innerHTML = html;
-        document.getElementById('paymentInfo').innerHTML = '';
-        document.getElementById('featuredModal').classList.add('active');
-    }
-
-    function selectPlan(days, price) {
-        let qr = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=00020126360014BR.GOV.BCB.PIX0114${SEU_PIX}5204000053039865404${price}5802BR5915MP6009SAOPAULO6304`;
-        document.getElementById('paymentInfo').innerHTML = `<div class="qr-code"><p><strong>Valor: R$ ${price}</strong></p><p>Chave: <span class="pix-highlight">${SEU_PIX}</span></p><img src="${qr}" style="width:150px; margin:10px;"><button class="copy-btn" onclick="copiarPix()">📋 Copiar Chave</button><button class="btn-primary" style="margin-top:10px;" onclick="solicitarPagamento(${days},${price})">✅ Já Paguei</button></div>`;
-    }
-
-    function copiarPix() { navigator.clipboard.writeText(SEU_PIX); alert('Chave copiada!'); }
-
-    function solicitarPagamento(days, price) {
-        if(confirm(`Confirmar pagamento de R$ ${price} para ${SEU_PIX}?`)) {
-            paymentRequests.push({ id: Date.now(), adId: selectedAdForFeature, userId: currentUser.id, userName: currentUser.name, days, price, status: 'pending', date: new Date().toISOString() });
-            saveAll();
-            alert('✅ Solicitação enviada! Aguarde confirmação do admin.');
-            closeModal('featuredModal');
-            renderMyAds();
-        }
-    }
-
-    function renderPayments() {
-        if(!currentUser || currentUser.role !== 'admin') { renderAdmin(); return; }
-        let pending = paymentRequests.filter(p => p.status === 'pending');
-        if(pending.length === 0) { document.getElementById('content').innerHTML = '<div class="loading">✅ Sem pagamentos pendentes</div>'; return; }
-        let html = `<h2>💰 Pagamentos Pendentes</h2><p>Chave: <strong>${SEU_PIX}</strong></p>`;
-        pending.forEach(p => {
-            html += `<div class="payment-request-card"><h3>${p.adTitle}</h3><p>Vendedor: ${p.userName}</p><p>Plano: ${p.days} dias - R$ ${p.price}</p><p>Data: ${new Date(p.date).toLocaleString()}</p><button class="btn-primary" style="width:auto; display:inline-block; margin-right:10px;" onclick="confirmar(${p.id},${p.days},${p.price})">✅ Confirmar</button><button class="btn-delete" style="width:auto; display:inline-block;" onclick="recusar(${p.id})">❌ Recusar</button></div>`;
-        });
-        document.getElementById('content').innerHTML = html;
-    }
-
-    function confirmar(paymentId, days, price) {
-        if(confirm(`Confirmar recebimento de R$ ${price}?`)) {
-            let req = paymentRequests.find(p => p.id === paymentId);
-            if(req) {
-                req.status = 'approved';
-                let ad = ads.find(a => a.id === req.adId);
-                if(ad) { ad.featured = true; ad.featuredExpiry = Date.now() + days*24*60*60*1000; }
-                let admin = users.find(u => u.role === 'admin');
-                if(admin) admin.balance = (admin.balance||0) + price;
-                saveAll();
-                alert('✅ Destaque ativado!');
-                renderPayments();
-                renderHome();
-            }
-        }
-    }
-
-    function recusar(paymentId) {
-        let req = paymentRequests.find(p => p.id === paymentId);
-        if(req) { req.status = 'rejected'; saveAll(); alert('Solicitação recusada'); renderPayments(); }
-    }
-
-    function renderAdmin() {
-        if(!currentUser || currentUser.role !== 'admin') { document.getElementById('content').innerHTML = '<div class="loading">🔒 Acesso negado</div>'; return; }
-        let total = users.reduce((s,u) => s+(u.balance||0),0);
-        let pending = paymentRequests.filter(p => p.status === 'pending').length;
-        document.getElementById('content').innerHTML = `<div class="stats-grid"><div class="stat-card"><div class="stat-number">R$ ${total}</div><div>Receita</div></div><div class="stat-card"><div class="stat-number">${ads.length}</div><div>Anúncios</div></div><div class="stat-card"><div class="stat-number">${pending}</div><div>Pendentes</div></div></div><div class="payment-config"><h3>💰 Sua Chave PIX</h3><p style="font-size:1.5rem;">${SEU_PIX}</p><button class="btn-primary" onclick="changeTab('payments')">Ver Pagamentos (${pending})</button></div>`;
-    }
-
-    function contactSeller(w, p) { if(w) window.open(`https://wa.me/55${w.replace(/\D/g,'')}?text=Olá! Vi seu anúncio do ${p}!`, '_blank'); else alert('Whatsapp não informado'); }
-    function deleteAd(id) { if(confirm('Excluir?')) { ads = ads.filter(a => a.id !== id); saveAll(); renderMyAds(); renderHome(); } }
-    function createAd() {
-        let title = document.getElementById('adTitle').value;
-        
+        let hasPending = paymentRequests.some(p => p.adId === adId && p.status === 'pending');
+        if(hasPending) { alert('Você já tem uma solicitação pendente para este anúncio.'); return; }
+ 
